@@ -17,6 +17,8 @@ The other day, I was listening to Venkat Subramaniam Tech Talk on Refactoring, a
 
 * Throw/Refactor everything you do every few minutes. It can be hard, but approach it well.
 
+* Knock dependency before you try to Mock dependency.
+
 * Fears while refactoring:
 
   * What if I break a working piece? Automated tests should handle this fear.
