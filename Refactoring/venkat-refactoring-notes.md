@@ -20,18 +20,16 @@ The other day, I was listening to Venkat Subramaniam Tech Talk on Refactoring, a
 * Fears while refactoring:
 
   * What if I break a working piece? Automated tests should handle this fear.
-
-
   * Is my change worse than the original code? Do it collectively, and take colleagues opinions. Pair programming.
   * It works. Why should I mess with it?
 
 * Principles:
-  * Code should be simple. Remember, simple is hard. 
-  * Clarity is very important.
+  * Code should be simple and clear. Remember, simple is hard. 
+  * Reduce code. A great programmer avoids writing code.
+  * Dont try to write clever code
+  * Cohesion. SRP. Avoid long methods. Methods should fit in single screen
   * No Comments
-  * Small Methods - Should fit in single screen.
-..* Dont try to write clever code
-..* Methods should be at different levels of abstraction. What did you do over weekend was a classy example, that explains the point precmaiesly.
-..* Take extremely small steps
-..* Frequent check-in
-..* Have courage to throw the code and re-start.
+  * Methods should be at different levels of abstraction. *What did you do over weekend* was a classy example, that explains the point precisely.
+  * Take extremely small steps
+  * Frequent check-in
+  * Have courage to throw the code and re-start.
