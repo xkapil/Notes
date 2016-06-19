@@ -3,7 +3,7 @@ Notes from Venkat's Refactoring tech talk
 
 The other day, I was listening to Venkat Subramaniam Tech Talk on Refactoring, and thought of jotting down the points that I can recollect today.
 
-* Refactoring improves *code quality*. 
+* Refactoring improves *code quality*.
 
 * Why bother improving quality, when customer doesn't sees the code? Because, one cannot be agile if the code sucks.
 
@@ -13,7 +13,7 @@ The other day, I was listening to Venkat Subramaniam Tech Talk on Refactoring, a
 
 * Programs must be written for programmers to read.
 
-* Frederick Brook said "Go ahead and build a s/w, and when you are done with it, throw it away. Try again, you might get it write."
+* Frederick Brook said "Go ahead and build a s/w, and when you are done with it, throw it away. Try again, you might get it right."
 
 * Throw/Refactor everything you do every few minutes. It can be hard, but approach it well.
 
@@ -26,7 +26,7 @@ The other day, I was listening to Venkat Subramaniam Tech Talk on Refactoring, a
   * It works. Why should I mess with it?
 
 * Principles:
-  * Code should be simple and clear. Remember, simple is hard. 
+  * Code should be simple and clear. Remember, simple is hard.
   * Reduce code. A great programmer avoids writing code.
   * Dont try to write clever code
   * Cohesion. SRP. Avoid long methods. Methods should fit in single screen
