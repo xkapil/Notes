@@ -86,4 +86,101 @@ needed by the task action when (and if) it runs later on in the build.
 * **Tasks are Objects** in Gradle. A task object has properties and methods just like any other object. We can even control the type of each task object, and access unique, type-specific functionality accordingly.
 
 * By default, each new task derives from `DefaultTask` very similar to Java wherein each class descends from `Object`.
-* 
+* `DefaultTask` doesn't really performs any task, but it do have methods and properties to interact with the Gradle project model.
+* Methods of `DefaultTask`:
+  * **dependsOn(task)**
+
+    Different ways to use this method:
+    ```
+    // Declare that world depends on hello
+    // Preserves any previously defined dependencies as well
+    task world {
+      dependsOn hello
+    }
+    // An alternate way to express the same dependency
+    task world {
+      dependsOn << hello
+    }
+    // Do the same using single quotes (which are usually optional)
+    task world {
+      dependsOn 'hello'
+    }
+    // Explicitly call the method on the task object
+    task world
+    world.dependsOn hello
+    // A shortcut for declaring dependencies
+    task world(dependsOn: hello)
+    ```
+
+    Having multiple dependencies:
+    ```
+    // Pass dependencies as a variable-length list
+    task world {
+    dependsOn hello, hello2
+    }
+    // Declare dependencies one at a time
+    task world {
+    dependsOn << hello
+    dependsOn << hello2
+    }
+    // Explicitly call the method on the task object, and pass variable-length list
+    task world
+    world.dependsOn hello, hello2
+    // A shortcut for dependencies only
+    // Note the Groovy list syntax
+    task world(dependsOn: [hello, hello2])
+    ```
+  * **doFirst(closure)**
+
+    Adds a block of executable code to the beginning of a task’s action. One can invoke it multiple times, and each time a closure will be appended to the beginning of the *execution lifecycle phase*.
+
+    Different ways to invoke the said method:
+
+    ```
+    // Actual Task named world
+    task world {
+      print ', World!'
+    }
+    // Approach 1 - Calling the method on the task object
+    world.doFirst {
+      print 'Hello'
+    }
+    // Approach 2 - Calling the doFirst method inside the task’s configuration block
+    world {
+      doFirst {
+        println 'create schema'
+      }
+    }
+    ```
+    Repeated calls to the `doFirst` method are additive. Each previous call’s action code is retained, and the new closure is appended to the start of the list to be executed in order.
+  * **doLast(closure)**
+    Exactly similar to `doFirst()`
+  * **onlyIf(closure)**
+  The `onlyIf` method allows you to express a predicate which determines whether a task should be executed. The value of the predicate is the value returned by the closure. Using this method, you can disable the execution of a task which might otherwise run as a normal part of the build’s dependency chain.
+  ```
+  task createSchema << {
+    println 'create database schema'
+  }
+  task loadTestData(dependsOn: createSchema) << {
+    println 'load test data'
+  }
+  loadTestData.onlyIf {
+    System.properties['load.data'] == 'true'
+  }
+  ```
+  Below are two varied invocations of the above build file.
+  ```
+  $ gradle loadTestData
+  create database schema
+  :loadTestData SKIPPED
+  // second invocation with the System property
+  $ gradle -Dload.data=true loadTestData
+  :createSchema
+  create database schema
+  :loadTestData
+  load test data
+  ```
+* Properties of `DefaultTask`:
+  * Prop1
+
+  * Prop 2
