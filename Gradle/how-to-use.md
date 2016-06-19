@@ -1,5 +1,5 @@
-**Introduction**
----
+## **Introduction**
+
 * Gradle gently nudges you to use Groovy DSL tailored to the task of building code.
 
 * General-purpose coding is always available as a fallback
@@ -10,8 +10,8 @@
 
 * When the standard Gradle DSL doesn’t have the language to describe what you want your build to do, you can extend the DSL through plug-ins
 
-**Getting Started**
----
+## **Getting Started**
+
 * Basic build.gradle
 ```
 task helloWorld << {
@@ -43,8 +43,9 @@ will produce the same result as previous one.
 
 * Few important command line options that you will use more often: `--help`, `-Dproperty=value` which sets a system property, `--info`, `--debug`, `--dry-run` or `-m`, `properties` and `tasks`
 
-Task System
----
+* You can use `gradle -b custom-build.gradle` if the build file name is different than *build.gradle*
+
+## Task System
 
 * Tasks are first-class citizens in the Gradle system, and have a `name` and `action` property. `Action` defines what the task will do. In our earlier build.gradle example, we had assigned `action` task using the left shift operator `<<`
 
@@ -76,7 +77,7 @@ hello {
 }
 ```
 
-One would assume that it prints `hello, world` first and then 'Config block', but that's not true.
+One would assume that it prints `hello, world` first and then `Config block`, but that's not true.
 
 > It will first execute the `Config block` during the *configuration lifecycle phase* of the task and then the `Action block` during the *execution lifecycle phase*.
 
@@ -87,6 +88,7 @@ needed by the task action when (and if) it runs later on in the build.
 
 * By default, each new task derives from `DefaultTask` very similar to Java wherein each class descends from `Object`.
 * `DefaultTask` doesn't really performs any task, but it do have methods and properties to interact with the Gradle project model.
+---
 * Methods of `DefaultTask`:
   * **dependsOn(task)**
 
@@ -180,7 +182,80 @@ needed by the task action when (and if) it runs later on in the build.
   :loadTestData
   load test data
   ```
+---
 * Properties of `DefaultTask`:
-  * Prop1
+  * `didWork` - A boolean property indicating whether the task completed successfully.
+  * `enabled` - A boolean property indicating whether the task will execute. `world.enabled = false`
+  * `path` - A string property containing the fully qualified path of a task. By default, a task’s path is simply the name of the task with a leading colon.
+  ```
+  task hello << {
+    println "THIS TASK'S PATH IS ${path}"
+  }
+  $ gradle hello
+  THIS TASK'S PATH IS :hello
+  ```
+  The leading colon indicates that the task is located in the top-level build file. However, for a given build, not all tasks must be present in the top-level build file, since Gradle supports dependent subprojects, or nested builds. If the task existed in a nested build called subProject , then the path would be *:subProject:hello*.
+  * `logger` - A reference to the internal Gradle logger object. The Gradle logger implements the `org.slf4j.Logger`  interface, but with a few extra logging levels added. Supported logging levels are:
+  * `logging`
+  * `description`
+  * `temporaryDir` - The `temporaryDir` property returns a `File` object pointing to a temporary directory belonging to this build file.
 
-  * Prop 2
+* Dynamic Properties - A task object functions like a hash map, able to contain whatever other arbitrary prop-
+erty names and values we care to assign to it (as long as the names don’t collide with
+the built-in property names).
+```
+task copyFiles {
+  // Dynamic property
+  fileManifest = [ 'data.csv', 'config.json' ]
+}
+task createArtifact(dependsOn: copyFiles) << {
+  println "FILES IN MANIFEST: ${copyFiles.fileManifest}"
+}
+$ gradle createArtifact
+FILES IN MANIFEST: [data.csv, config.json]
+```
+---
+* Task Types - Declaring a task type is a lot like extending a base class in an object-oriented programming language. Here are few examples:
+  * Copy - It copies files from one directory into another, with optional restrictions on which file patterns are included or excluded.
+  ```
+  task copyFiles(type: Copy) {
+    from 'resources'
+    into 'target'
+    include '**/*.xml', '**/*.txt', '**/*.properties'
+  }  
+  ```
+  Note that the `from` , `into` , and `include` methods are inherited from the `Copy`
+
+  * Jar - It creates a jar file from source set. Java plugin contains this task.
+  ```
+  apply plugin: 'java'
+  task customJar(type: Jar) {
+    manifest {
+        attributes firstKey: 'firstValue', secondKey: 'secondValue'
+      }
+      archiveName = 'hello.jar'
+      destinationDir = file("${buildDir}/jars")
+      from sourceSets.main.classes
+  }
+  ```
+  The contents of the JAR are identified by the `from sourceSets.main.classes` line, which specifies that the compiled .class files of the main Java sources are to be included. The `from` method is identical to the one used in the `CopyTask` example, which reveals an interesting insight: the `Jar` task extends the `Copy` task.
+  The expression being assigned to `destinationDir` is worth noting. It would be natural just to assign a string to `destinationDir`, but the property expects an argument compatible with `java.io.File`. The `file()` method, which is always available inside a Gradle build file, converts the string to a `File` object.
+
+  * JavaExec - It runs a java class with a `main()`.
+  ```
+  apply plugin: 'java'
+  repositories {
+      mavenCentral()
+  }
+  dependencies {
+    runtime 'commons-codec:commons-codec:1.5'
+  }
+  task encode(type: JavaExec, dependsOn: classes) {
+    main = 'org.gradle.example.commandline.MetaphoneEncoder'
+    args = "The rain in Spain falls mainly in the plain".split().toList()
+    classpath sourceSets.main.classesDir
+    classpath configurations.runtime
+  }
+  ```
+
+* Custom Task Types -  
