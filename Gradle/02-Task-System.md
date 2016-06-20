@@ -41,7 +41,6 @@ needed by the task action when (and if) it runs later on in the build.
 
 * By default, each new task derives from `DefaultTask` very similar to Java wherein each class descends from `Object`.
 * `DefaultTask` doesn't really performs any task, but it do have methods and properties to interact with the Gradle project model.
----
 * Methods of `DefaultTask`:
   * **dependsOn(task)**
 
@@ -135,7 +134,7 @@ needed by the task action when (and if) it runs later on in the build.
   :loadTestData
   load test data
   ```
----
+
 * Properties of `DefaultTask`:
   * `didWork` - A boolean property indicating whether the task completed successfully.
   * `enabled` - A boolean property indicating whether the task will execute. `world.enabled = false`
