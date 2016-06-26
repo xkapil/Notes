@@ -1,3 +1,4 @@
+package io.xkapil.gradle.customtask
 /**
  * Created by kapil on 20/6/16.
  */
@@ -16,7 +17,7 @@ class MySqlTask extends DefaultTask {
     def runQuery() {
         def cmd = "mysql -u ${username} -p${password} -h ${hostname} -P ${port} -e "
         project.exec {
-            println("Executing Command")
+            println "Executing command"
             commandLine = cmd.split().toList() + sql
         }
     }

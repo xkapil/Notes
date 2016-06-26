@@ -1,6 +1,8 @@
 group 'io.xkapil.gradle.custom-task'
 version '1.0-SNAPSHOT'
 
+import io.xkapil.gradle.customtask.MySqlTask
+
 apply plugin: 'groovy'
 apply plugin: 'java'
 
@@ -11,4 +13,8 @@ repositories {
 dependencies {
     compile gradleApi()
     compile 'org.codehaus.groovy:groovy-all:2.3.11'
+}
+
+task createDatabase(type: MySqlTask) {
+    sql = 'CREATE DATABASE IF NOT EXISTS example'
 }
