@@ -8,7 +8,7 @@
 
 * It has a tree kind of structure with branches and leaf.
 * *blob* contains file contents and take the role of leaf in a `tree`. These are immutable.
-* A *blob* is named by computing the SHA1 hash id of its size and contents. Hence a file with same name and same contents, will have a same hash on 2 different machines.
+* A *blob* is named by computing the SHA1 hash-id (40 characters) of its size and contents. Hence a file with same name and same contents, will have a same hash on 2 different machines.
 * The hash verifies that the blob contents never changes.
 * The same contents are always represented by the same blob, no matter where it appears: across commits, across repos.
 * The metadata of the blob (eg filename) is not known to the blob. The `tree` carries the metadata for the blob.
@@ -32,13 +32,10 @@
 * `git ls-tree <hash-id>` is very similar to `ls` command in unix, which will display all the containing blobs and tree along with their hash-ids. You can also do `git ls-tree HEAD`. Since, *HEAD* is nothing but a pointer to the latest commit hash-id.
 * IMPORTANT - Every **commit** holds a single `tree`.
 
+* `hash-id` is 40 character long, but can be referred by 4 or more characters, if it can uniquely point to an object.
+
 * Decoding ***HEAD***
   * `git rev-parse HEAD` will give you the hash-id of the latest commit.
   * `git log` command which shows all the commits made, is also helpful to see the hash-id of the latest commit or HEAD.
   * `git cat-file -t HEAD` will always return you `commit`, since HEAD is just a pointer pointing to latest commit. The commit object is holdind the top-most tree of the repo.
   * `git cat-file -p HEAD` will show you the tree hash-id along with the parent commit's hash-id (if available), along with the commit message, author information etc.
-
-### Creation of Trees
-
-* Every `commit` holds a single `tree`. `Trees` owns `blob`.
-* 
