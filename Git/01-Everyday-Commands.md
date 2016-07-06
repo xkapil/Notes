@@ -66,4 +66,6 @@
 
 `git reset --hard HEAD` // by-default it's soft
 
+`git reset <commit-hash-id>` // this will rollback any commits that I have made.
+
 `git clean -fd` // removes untracked files and dirs
