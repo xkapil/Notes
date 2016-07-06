@@ -35,7 +35,7 @@
 * `hash-id` is 40 character long, but can be referred by 4 or more characters, if it can uniquely point to an object.
 
 * Decoding ***HEAD***
+  * *HEAD* is just a variable or a pointer which always points to current checked-out commit.
   * `git rev-parse HEAD` will give you the hash-id of the latest commit.
-  * `git log` command which shows all the commits made, is also helpful to see the hash-id of the latest commit or HEAD.
-  * `git cat-file -t HEAD` will always return you `commit`, since HEAD is just a pointer pointing to latest commit. The commit object is holdind the top-most tree of the repo.
+  * `git cat-file -t HEAD` will always return you `commit`, since HEAD is just a pointer pointing to latest commit. The commit object is holding the top-most tree of the repo.
   * `git cat-file -p HEAD` will show you the tree hash-id along with the parent commit's hash-id (if available), along with the commit message, author information etc.
