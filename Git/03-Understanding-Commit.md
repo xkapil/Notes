@@ -2,7 +2,6 @@
 
 * Every `commit` holds a single `tree`. `Trees` owns `blob`.
 * Every `tree` will have same hash-id across different computers, as far as they hold same `blobs` (and sub-trees).
-*
 
 * Following are the steps that Git performs when you fire a `git commit` command for the first time in a new repo:
   1. `git write-tree` will record the contents of the index on a `tree`; and will response back with the hash-id of the tree object just created.
@@ -29,8 +28,12 @@
 
 * `git reset --hard <commit-hash-id>` will reset my HEAD of my working tree to a particular commit. `--hard` will remove/erase all the changes in my working dir. By default, it's always a `--soft` reset.
 
-Another way is to do a `git checkout <commit-hash-id>`.
+  Another way is to do a `git checkout <commit-hash-id>`.
 
-*  ![Commit Architecture](images/git-1)
+**NOTE** - Difference between `git reset` and `git checkout` is about the state of `refs/heads/<branch>`.
+`git checkout <commit-hash-id>` will move the repo in a detached *HEAD* state. Anonymous branch. Keeping the top of the master branch as-is. Firing `git checkout master` will return you the repo to old state.
+`git reset <commit-hash-id>` will rollback the commits made. *HEAD* and `refs/heads/master` will point to the same commit object. Using `--soft` (which is default) keeps the changes in your working copy, whereas `--hard` will remove all the changes. Performing another commit with same changes will give you a new commit object with a new hash-id, and there is no way to go back to previous commit object. It should be garbage collected as there is no way to back to the old commit object.
+
+ ![Commit Architecture](images/git-1)
 
 * WIP.
