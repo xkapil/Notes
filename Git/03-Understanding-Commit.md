@@ -18,7 +18,7 @@
 
 * A single `commit` can have one or more parents. While being at one commit, one can traverse the entire history using the parent link. Eg. You have made 2 commits so far on your repo. The "second commit"'s parent will be the "first commit".
 
-* Because of the above property of the `commit` object, a `git branch` is nothing but a reference to a commit object. `refs/heads/<branch_name>` file carries the hash-id of the commit object. *master* branch is no different.
+* Because of the above property of the `commit` object, a `git branch` is nothing but a reference to a commit object. `refs/heads/<branch-name>` file carries the hash-id of the commit object. *master* branch is no different.
 
 * `git branch -v` will give you the top-level referenced commit object's hash-id and summary.
 
@@ -32,8 +32,13 @@
 
 **NOTE** - Difference between `git reset` and `git checkout` is about the state of `refs/heads/<branch>`.
 `git checkout <commit-hash-id>` will move the repo in a detached *HEAD* state. Anonymous branch. Keeping the top of the master branch as-is. Firing `git checkout master` will return you the repo to old state.
-`git reset <commit-hash-id>` will rollback the commits made. *HEAD* and `refs/heads/master` will point to the same commit object. Using `--soft` (which is default) keeps the changes in your working copy, whereas `--hard` will remove all the changes. Performing another commit with same changes will give you a new commit object with a new hash-id, and there is no way to go back to previous commit object. It should be garbage collected as there is no way to back to the old commit object.
+`git reset <commit-hash-id>` will rollback the commits made. *HEAD* and `refs/heads/master` will be updated, and point to the same commit object. Using `--soft` (which is default) keeps the changes in your working copy, whereas `--hard` will remove all the changes. Performing another commit with same changes will give you a new commit object with a new hash-id, and there is no way to go back to previous commit object. It should be garbage collected as there is no way to back to the old commit object.
 
  ![Commit Architecture](images/git-1)
 
-* WIP.
+* Parent of any commit can be referenced by ^. Eg. `git checkout HEAD^` will replace the working tree with the parent commit of the commit object to which HEAD is pointing to currently.
+  I hope by now you have figured out that *HEAD*, *<branch-name>*, *<tag-name>* are nothing but reference to particular commit-hash-id. Hence, you can also do this - `git checkout <commit-hash-id>^`. Two carets will refer to parent's parent.
+
+* Tilde sign can take you back *n* commits. Eg. `git checkout HEAD~3` means take me 3 commits back.
+* `name:path` is also very useful while doing a diff. Eg. `git diff HEAD~1:myfile.txt HEAD:myfile.txt`
+* 
