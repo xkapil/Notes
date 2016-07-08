@@ -24,7 +24,7 @@
 
 * One difference between `branch` and `tag`, is that `tags` can have description. Also, tag-alias never changes, but branch-alias changes with every commit made in the branch.
 
-* If I'd like, I can refer everything in the repository using the `hash-id`, and not use branch, HEAD or tag.
+* If I'd like, I can refer everything in the repository using the `hash-id`, and not use branch, *HEAD* or tag.
 
 * `git reset --hard <commit-hash-id>` will reset my HEAD of my working tree to a particular commit. `--hard` will remove/erase all the changes in my working dir. By default, it's always a `--soft` reset.
 
@@ -41,4 +41,4 @@
 
 * Tilde sign can take you back *n* commits. Eg. `git checkout HEAD~3` means take me 3 commits back.
 * `name:path` is also very useful while doing a diff. Eg. `git diff HEAD~1:myfile.txt HEAD:myfile.txt`
-* 
+*
