@@ -1,8 +1,8 @@
 ## How Git Works
 
-* `Git` has a 3-tree architecture. Which means apart from **Working Copy** and **Repository**, it has a **Staging Area** as well.
+* `Git` has a 3-tree architecture. Which means apart from **Working Copy** and **Repository**, it has a **Staging Area** as well. **Staging Area** is also referred as **Index Area**
 
-* We use `git add` to move files into **Staging Area** or **Index Area** and finally `git commit` to move them into the **Repository**.
+* We use `git add` to move files into **Staging Area** and finally `git commit` to move them into the **Repository**.
 
 ### Repository Architecture
 
