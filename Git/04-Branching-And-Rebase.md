@@ -5,20 +5,20 @@
   ```
   mkdir repo && cd repo
   git init
-  echo "Line 1" >> file1.txt
+  echo "Line 1" >> file.txt
   git add .
-  git commit -m "master 1"
-  echo "Line 2" >> file1.txt
-  git commit -am "master 2"
+  git commit -m "M1"
+  echo "Line 2" >> file.txt
+  git commit -am "M2"
   ```
   // create a new branch
   ```
   git checkout -b feature
   echo "Line 1" >> file-feature.txt
   git add .
-  git commit -m "feature 1"
+  git commit -m "F1"
   echo "Line 2" >> file-feature.txt
-  git commit -am "feature 2"
+  git commit -am "F2"
   ```
 
   Please note that I am working with a different file in my *feature* branch, so as to avoid any merge conflicts.
@@ -27,17 +27,18 @@
   // come back to master branch and take it ahead by one commit
   ```
   git checkout master
-  echo "Line 3" >> file1.txt
-  git commit -am "master 3"
+  echo "Line 3" >> file.txt
+  git commit -am "M3"
   ```
 
   * So, our repo looks like this currently.
-
-    ![Current repo snapsot](images/merge1.png)
-
-    The circles are the commit objects with the commit message on them.
+           F1<--F2
+          /
+    M1<--M2<--M3
 
   * Now, we would like to merge the changes done in *feature* branch with the *master*.
+
+  * Before performing a merge, let's note down the commit hash-ids of both the *master* and *feature* branch.
 
   * If we execute following commands, our repo will look like the image below:
 
@@ -45,14 +46,17 @@
     git checkout master
     git merge feature
     ```
-
-    ![After Merge](images/merge2.png)
+          F1<--F2
+          /       \  M3' (Merge-Commit)
+    M1<--M2<--M3  /
 
     Please note that the new *merge commit* is a meta-commit which has no changes of it's own. Also, it has 2 parents.
 
     Running `git log --graph` will show you both the divergent paths.
 
-    Performing a `git reset HEAD^` that is moving one step back, and then doing a `git log` will only show the master 1, 2 and 3 commits.
+    Also, note that the commit hash-ids remains same, like they were previously noted.
+
+    Performing a `git reset HEAD^` that is, moving one step back, will take us back to our original situation. Then doing a `git log` will only show the master 1, 2 and 3 commits.
 
   * However, performing a git rebase will give completely different results.
 
@@ -63,7 +67,7 @@
 
     The repo will look like a straight line having no commit with 2 parents.
 
-    ![After Rebase](images/merge3.png)
+    M1<--M2<--F1<--F2<--M3
 
 * Rebase command is useful when you are working on a local branch and need now to merge your commits with master.
 
