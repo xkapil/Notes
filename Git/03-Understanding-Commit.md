@@ -41,4 +41,3 @@
 
 * Tilde sign can take you back *n* commits. Eg. `git checkout HEAD~3` means take me 3 commits back.
 * `name:path` is also very useful while doing a diff. Eg. `git diff HEAD~1:myfile.txt HEAD:myfile.txt`
-*
