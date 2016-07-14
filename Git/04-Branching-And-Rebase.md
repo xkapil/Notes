@@ -32,9 +32,10 @@
   ```
 
   * So, our repo looks like this currently.
-           F1<--F2
-          /
-    M1<--M2<--M3
+
+            F1<--F2
+            /
+      M1<--M2<--M3
 
   * Now, we would like to merge the changes done in *feature* branch with the *master*.
 
@@ -69,8 +70,37 @@
 
     M1<--M2<--F1<--F2<--M3
 
-* Rebase command is useful when you are working on a local branch and need now to merge your commits with master.
+  * Rebase command is useful when you are working on a local branch and need now to merge your commits with master.
 
-* In my current project, we always work locally on our branch, and when the feature is complete, we do a `git rebase` with squash merge ensuring only single commit is pushed to the master branch.
+  * Also take a note that the commit-hash-id of M3 has been changed/rebased.
 
-* WIP
+  * Just don’t rewrite your history if it’s been shared with others.
+
+#### Interactive Rebase with Squash
+
+* The output from the last rebase command is not optimum, and might not want to have all the commits (F1 and F2 in this case) to pollute my master history.
+
+* I may want to have a my master look like this:
+
+    M1<--M2<--M3<--New_Feature
+
+* To achieve this, let's go back to the original state of repo:
+
+          F1<--F2
+          /
+    M1<--M2<--M3
+
+* Execute following commands:
+  ```
+  git checkout feature
+  git rebase master --interactive
+  ```
+
+* *interactive* let's you chose which commits to pick, squash, fixup, drop etc. So, while you are at it, you can squash/fixup all the commits and keep one commit with the message containing info about the feature.
+
+* Now, you can come back to *master* and perform a merge or rebase.
+
+  ```
+  git checkout master
+  git merge feature
+    ```
