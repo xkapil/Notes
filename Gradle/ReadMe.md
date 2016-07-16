@@ -7,3 +7,5 @@
 * [Defining Custom Task](03-Defining-Custom-Task.md)
 
 * [Writing Custom Plugin](04-Writing-Custom-Plugin.md)
+
+Notes made on *Gradle 1.4*
