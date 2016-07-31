@@ -98,9 +98,19 @@
 
 * *interactive* let's you chose which commits to pick, squash, fixup, drop etc. So, while you are at it, you can squash/fixup all the commits and keep one commit with the message containing info about the feature.
 
+* The above commands *rebases* our F1, F2 commits to M3. Hence, now the repo will look like
+
+                  F1<--F2
+                 /
+      M1<--M2<--M3
+
 * Now, you can come back to *master* and perform a merge or rebase.
 
   ```
   git checkout master
   git merge feature
     ```
+
+* Which gives us the desired repo structure.
+
+      M1<--M2<--M3<--New_Feature
