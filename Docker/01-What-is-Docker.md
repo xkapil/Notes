@@ -2,6 +2,8 @@
 
 * ***Docker*** is an open platform for developing, shipping, and running applications.
 * Docker helps you ship code faster, test faster, deploy faster, and shorten the cycle between writing code and running code.
+* Docker does this by combining kernel containerization features with workflows and tooling that help you manage and deploy your applications.
+* Docker is written in Go.
 
 #### Linux Containers
 
