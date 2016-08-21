@@ -4,6 +4,10 @@
 
 * We use `git add` to move files into **Staging Area** and finally `git commit` to move them into the **Repository**.
 
+* The below diagram should explain the above points.
+
+![Git](images/git-flow.png)
+
 ### Repository Architecture
 
 * It has a tree kind of structure with branches and leaf.

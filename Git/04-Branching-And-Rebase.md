@@ -51,7 +51,7 @@
           /       \  M3' (Merge-Commit)
     M1<--M2<--M3  /
 
-    Please note that the new *merge commit* is a meta-commit which has no changes of it's own. Also, it has 2 parents.
+    Please note that the new *merge commit* is a meta-commit because its contents are related to work done solely in the repository, and not to new work done in the working tree. Also note that it has **2 parents**.
 
     Running `git log --graph` will show you both the divergent paths.
 
@@ -109,7 +109,7 @@
   ```
   git checkout master
   git merge feature
-    ```
+  ```
 
 * Which gives us the desired repo structure.
 
