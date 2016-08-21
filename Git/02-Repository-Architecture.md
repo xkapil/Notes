@@ -31,6 +31,7 @@
 
 * `git cat-file -p <hash-id>` will also behave exactly similar to `git show`. `-p` stands for *pretty print*.
 * You can find out the type of the hash-id using the following command: `git cat-file -t <hash-id>`
+* One can find out the size of a *blob* using the command `git cat-file -s <hash-id>`
 * It appears, that `tree` is also immutable. I added a new directory in the repository, and `git show <hash-id of top level dir>` it still showed me the original file, without the new dir in it. Then, I did a `find .git/objects -type f | sort` and  found out a new hash-id which showed the original file along with the new dir in it.
 
 * `git ls-tree <hash-id>` is very similar to `ls` command in unix, which will display all the containing blobs and tree along with their hash-ids. You can also do `git ls-tree HEAD`. Since, *HEAD* is nothing but a pointer to the latest commit hash-id.
