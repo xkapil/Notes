@@ -104,11 +104,12 @@
                  /
       M1<--M2<--M3
 
-* Now, you can come back to *master* and perform a merge or rebase.
+* Now, you can come back to *master* and perform a squash merge.
 
   ```
   git checkout master
-  git merge feature
+  git merge --squash feature
+  git commit -m "New_Feature"
   ```
 
 * Which gives us the desired repo structure.
