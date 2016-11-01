@@ -51,7 +51,7 @@
           /       \  M3' (Merge-Commit)
     M1<--M2<--M3  /
 
-    Please note that the new *merge commit* is a meta-commit which has no changes of it's own. Also, it has 2 parents.
+    Please note that the new *merge commit* is a meta-commit because its contents are related to work done solely in the repository, and not to new work done in the working tree. Also note that it has **2 parents**.
 
     Running `git log --graph` will show you both the divergent paths.
 
@@ -68,7 +68,7 @@
 
     The repo will look like a straight line having no commit with 2 parents.
 
-    M1<--M2<--F1<--F2<--M3
+    M1<--M2<--F1<--F2<--M3`
 
   * Rebase command is useful when you are working on a local branch and need now to merge your commits with master.
 
@@ -98,9 +98,20 @@
 
 * *interactive* let's you chose which commits to pick, squash, fixup, drop etc. So, while you are at it, you can squash/fixup all the commits and keep one commit with the message containing info about the feature.
 
-* Now, you can come back to *master* and perform a merge or rebase.
+* The above commands *rebases* our F1, F2 commits to M3. Hence, now the repo will look like
+
+                  F1`<--F2`
+                 /
+      M1<--M2<--M3
+
+* Now, you can come back to *master* and perform a squash merge.
 
   ```
   git checkout master
-  git merge feature
-    ```
+  git merge --squash feature
+  git commit -m "New_Feature"
+  ```
+
+* Which gives us the desired repo structure.
+
+      M1<--M2<--M3<--New_Feature
