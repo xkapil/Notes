@@ -68,7 +68,7 @@
 
     The repo will look like a straight line having no commit with 2 parents.
 
-    M1<--M2<--F1<--F2<--M3
+    M1<--M2<--F1<--F2<--M3`
 
   * Rebase command is useful when you are working on a local branch and need now to merge your commits with master.
 
@@ -100,7 +100,7 @@
 
 * The above commands *rebases* our F1, F2 commits to M3. Hence, now the repo will look like
 
-                  F1<--F2
+                  F1`<--F2`
                  /
       M1<--M2<--M3
 
