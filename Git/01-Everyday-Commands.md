@@ -56,6 +56,22 @@
 
 `git push origin :<branch_name>` // removes branch from remote location
 
+##### Tags
+
+`git tag` // lists out all tags
+
+`git tag -l "v1.1*"` // searches all tags matching the pattern
+
+`git tag -a v1.1 -m "release 1.1"` // creates an annotated tag
+
+`git show <tag-name>` // shows the author, message, diffs for the given tag
+
+`git tag v1.1` // creates a light-weight tag which is just a pointer to a commit object
+
+`git tag -a v1.1 <commit-hash-id>` // creates an annotated tag pointing to specified commit object.
+
+`git push origin --tags` // will push all your tags. By default, `git push` doesn't pushes your tags.
+
 ##### General
 
 `git checkout --<file_name>` // abort changes of a file

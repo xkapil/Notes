@@ -115,3 +115,42 @@
 * Which gives us the desired repo structure.
 
       M1<--M2<--M3<--New_Feature
+
+
+### Tagging
+
+* Tags are typically used for releases.
+
+* Git uses two main types of tags:
+  * Lightweight - these are just pointers to commit objects which don't move.
+  * Annotated - they contain additional information like tagger name, date/time, tag description.
+
+##### Annotated Tagging
+
+* Let's create a new repo having a default master branch with two commit objects.
+
+  ```
+  mkdir repo && cd repo
+  git init
+  echo "Line 1" >> file.txt
+  git add .
+  git commit -m "M1"
+  echo "Line 2" >> file.txt
+  git commit -am "M2"
+  ```
+
+* Create an annotated tag
+  `git tag -a v1.1 -m "releasing 1.1"`
+
+* Now, you may want to checkout the type of object created
+  `git rev-parse v1.1` // will give you the hash-id of the tag just created
+  `git cat-file -t <hash-id>` // will give you the object type as *tag*
+  `git show v1.1` // will give you tagger name, description, date/time along with the commit object information to which the tag is pointing to.
+
+##### Lightweight Tagging
+
+* Creating a light-weight tag
+  `git tag v1.2`
+
+* Executing `git rev-parse` and `git show` commands will tell us that the tag is nothing but a pointer to the commit object.
+* `git cat-file -t v1.2` will also return the type as *commit*
