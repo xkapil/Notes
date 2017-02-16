@@ -33,6 +33,7 @@
 
   * So, our repo looks like this currently.
 
+
             F1<--F2
             /
       M1<--M2<--M3
@@ -47,6 +48,8 @@
     git checkout master
     git merge feature
     ```
+
+
           F1<--F2
           /       \  M3' (Merge-Commit)
     M1<--M2<--M3  /
@@ -85,6 +88,7 @@
     M1<--M2<--M3<--New_Feature
 
 * To achieve this, let's go back to the original state of repo:
+
 
           F1<--F2
           /
