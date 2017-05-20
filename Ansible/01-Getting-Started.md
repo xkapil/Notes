@@ -39,14 +39,13 @@ host3 ansible_ssh_host=192.0.2.3
 * Here is a sample *yaml* which installs *git* on all the hosts.
 
   ```
-  ---
-- hosts: all
-become: true
-tasks:
-   - name: Install Package
-     apt: name=nginx update_cache=true state=latest
-   - name: ensure nginx is running (and enable it at boot)
-     service: name=nginx state=started enabled=yes
+  - hosts: all
+  become: true
+  tasks:
+     - name: Install Package
+       apt: name=nginx update_cache=true state=latest
+     - name: ensure nginx is running (and enable it at boot)
+       service: name=nginx state=started enabled=yes
   ```
 
 * Run the following command to execute the above yaml
