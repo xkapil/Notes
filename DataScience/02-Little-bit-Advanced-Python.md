@@ -22,9 +22,10 @@ t2 = TestClass("HR")
 print t.get_dept()
 ```
 
-* Pure Functions have no side-effects
-* Python isn't a pure functional language but it has the aspects of a functional programming eg. functions are first class citizens and can be passed around.
-* FP causes one to think very heavily about chaning operations together. This is underlying theme in data science as well.
+* Functional language
+  * Pure Functions have no side-effects
+  * Python isn't a pure functional language but it has the aspects of a functional programming eg. functions are first class citizens and can be passed around.
+  * FP causes one to think very heavily about chaning operations together. This is underlying theme in data science as well.
 
 * Map - a built-in function in Python
 
@@ -66,7 +67,7 @@ print t.get_dept()
     square = lambda x: x*x # a square function
     add_three = lambda a,b,c: a+b+c  
   ```
-  * Refactoring the square example we just saw a while back
+  * Refactoring the map example of squaring numbers in list which we just saw a while back
 
   ```
     l1 = [1,2,3,4]
@@ -74,4 +75,21 @@ print t.get_dept()
     l2 = map(lambda x: x*x, l1)
     print l2 # would print square of all elements in the list
 
+  ```
+
+* List Comprehensions
+  * Example:
+  ```
+    even_list = []
+    for number in range(0, 1000):
+      if number % 2 == 0:
+          even_list.append(number)
+
+    print even_list
+
+  ```
+
+  * An abbreviated way using list comprehension will look like:
+  ```
+  even_list = [number for number in range(0, 1000) if number % 2 == 0]
   ```
